@@ -1,23 +1,16 @@
 const projects = [
   {
     id: "p1",
-    title: "Hybrid RAG Chatbot — Healthcare KB",
-    short: "Vector + keyword hybrid retrieval with Qdrant + Neo4j linking clinical docs and tickets for faster support.",
-    tech: ["Qdrant", "text-embedding-3-large", "Neo4j", "FastAPI"],
+    title: "RAG Chatbot — Technology Services",
+    short: "Developed a knowledge retrieval system for a global pharmaceutical leader by integrating data from Confluence,Bitbucket, and ticketing systems, enabling instant Q&A and summarisation that reduced information lookup time by over 65%.",
+    tech: [, "Langchain","Langfuse","Qdrant", "text-embedding-3-large", "FastAPI","AWS","PostgreSQL"],
     link: "#"
   },
   {
     id: "p2",
-    title: "Incident Triage Automation",
-    short: "Automated ticket classification + root cause clustering that reduced manual triage by 45%.",
-    tech: ["Python", "Scikit-learn", "S3", "Lambda"],
-    link: "#"
-  },
-  {
-    id: "p3",
-    title: "Model Ops — Canary + Monitoring",
-    short: "End-to-end model serving with canary rollout, drift detection and alerting for production LLMs.",
-    tech: ["Docker", "Kubernetes", "Prometheus", "Grafana"],
+    title: "Knowledge IQ",
+    short: "Built a document and web content ingestion system with vectorisation for efficient Q&A and summarisation,enabling faster and more accurate information retrieval with source traceability.",
+    tech: ["Python", "Flask", "Langchain","Azure","FAISS","Computer Vision"],
     link: "#"
   }
 ];
