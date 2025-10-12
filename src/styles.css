@@ -255,10 +255,88 @@ body{
   .nav-links{display:none}
 }
 
-/* small animated touches */
-.node.pulse{ animation: pulse 4s infinite ease-in-out; }
-@keyframes pulse {
-  0%{ transform:scale(1) }
-  50%{ transform:scale(1.15) }
-  100%{ transform:scale(1) }
+.animated-nodes-area {
+  position: relative;
+  width: 100%;
+  height: 420px; /* Match hero-right height */
+  min-height: 420px;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.animated-node {
+  position: absolute;
+  border-radius: 50%;
+  background: #7b61ff;
+  box-shadow: 0 0 8px #7b61ff44;
+  cursor: pointer;
+  transition: 
+    transform 0.3s cubic-bezier(.5,1.5,.5,1),
+    background 0.3s,
+    box-shadow 0.3s;
+  pointer-events: auto;
+}
+.animated-node:hover, .animated-node:focus {
+  box-shadow: 0 0 16px #00e0ff88;
+}
+.animated-node.active {
+  transform: scale(1.5) rotate(10deg);
+  background: linear-gradient(135deg,#7b61ff,#00e0ff);
+  box-shadow: 0 0 24px #00e0ff88;
+  z-index: 2;
+}
+.hero-right {
+  position: relative;
+  width: 40%;
+  min-width: 320px;
+  min-height: 420px; /* Increased height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible; /* Ensure tooltips are not clipped */
+}
+@media (max-width: 900px) {
+  .hero-right {
+    width: 100%;
+    min-width: 0;
+    margin-top: 32px;
+  }
+}
+
+.node-tooltip {
+  position: absolute;
+  background: linear-gradient(135deg, #fff 80%, #e0f7ff 100%);
+  color: #222;
+  padding: 12px 18px 12px 16px;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px #7b61ff33, 0 1.5px 8px #00e0ff22;
+  font-size: 1.05rem;
+  font-weight: 500;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+  z-index: 10;
+  transition: opacity 0.2s, transform 0.3s cubic-bezier(.5,1.5,.5,1);
+  opacity: 0.97;
+  backdrop-filter: blur(6px);
+  border: 1.5px solid #e0f7ff44;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;     /* Box fits text exactly */
+  min-width: 0;
+  max-width: none;       /* Prevent overflow off screen */
+  white-space: nowrap;    /* Keep text in one line, remove if you want wrapping */
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.node-tooltip::before {
+  content: "";
+  display: block;
+  width: 7px;
+  height: 32px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #7b61ff 60%, #00e0ff 100%);
+  margin-right: 8px;
+  box-shadow: 0 0 8px #00e0ff44;
 }
