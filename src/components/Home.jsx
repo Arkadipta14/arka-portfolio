@@ -1,6 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-export default function Home(){
+export default function Home() {
+  const [activeNode, setActiveNode] = useState(null);
+  const [tooltip, setTooltip] = useState({ idx: null, visible: false });
+  const [, setTick] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => setTick(t => t + 1), 40);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Tooltip hide logic
+  useEffect(() => {
+    if (tooltip.visible) {
+      const timer = setTimeout(() => setTooltip({ idx: null, visible: false }), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [tooltip]);
+
+  const nodes = [
+    { left: 20, top: 18, size: 24 },
+    { left: 48, top: 12, size: 22 },
+    { left: 72, top: 34, size: 18 },
+    { left: 60, top: 68, size: 20 },
+    { left: 30, top: 60, size: 14 }
+  ];
+
+  const messages = [
+  "Ask me about LLMs!",
+  "I automate research.",
+  "Building smarter healthcare.",
+  "Let's talk GenAI.",
+  "From data to deployment."
+  ];
+
   return (
     <section id="home" className="home container" aria-labelledby="home-heading">
       <div className="hero-left">
@@ -27,30 +60,45 @@ export default function Home(){
               <div style={{color:"var(--muted)", marginTop:8}}>AWS · Azure</div>
             </div>
           </div>
-
         </div>
       </div>
-
       <aside className="hero-right" aria-hidden>
-        <div className="model-viz">
-          <div className="graph" aria-hidden>
-            {/* Decorative nodes */}
-            <div className="node pulse" style={{left:"20%",top:"18%"}}/>
-            <div className="node" style={{left:"48%",top:"12%", width:22, height:22}}/>
-            <div className="node" style={{left:"72%",top:"34%", width:18, height:18}}/>
-            <div className="node" style={{left:"60%",top:"68%", width:20, height:20}}/>
-            <div className="node" style={{left:"30%",top:"60%", width:14, height:14}}/>
-            <svg viewBox="0 0 200 120" style={{width:"90%", height:"90%", position:"absolute", opacity:0.6}}>
-              <defs>
-                <linearGradient id="g" x1="0" x2="1">
-                  <stop offset="0" stopColor="#7b61ff" />
-                  <stop offset="1" stopColor="#00e0ff" />
-                </linearGradient>
-              </defs>
-              <path d="M10 80 Q 60 10, 120 50 T 190 40" stroke="url(#g)" strokeWidth="1.6" fill="none" strokeLinecap="round"/>
-              <circle cx="30" cy="60" r="2.2" fill="#7b61ff" />
-            </svg>
-          </div>
+        <div className="animated-nodes-area">
+          {nodes.map((node, idx) => {
+            const left = `calc(${node.left}% + ${Math.sin(Date.now()/800 + idx) * 16}px)`;
+            const top = `calc(${node.top}% + ${Math.cos(Date.now()/800 + idx) * 12}px)`;
+            return (
+              <React.Fragment key={idx}>
+                <div
+                  className={`node animated-node${activeNode === idx ? " active" : ""}`}
+                  style={{
+                    left,
+                    top,
+                    width: node.size,
+                    height: node.size,
+                    background: activeNode === idx ? "linear-gradient(135deg,#7b61ff,#00e0ff)" : "#7b61ff"
+                  }}
+                  onClick={() => {
+                    setActiveNode(idx);
+                    setTooltip({ idx, visible: true });
+                  }}
+                  tabIndex={0}
+                  aria-label={`Animated node ${idx+1}`}
+                />
+                {tooltip.visible && tooltip.idx === idx && (
+                  <div
+                    className="node-tooltip"
+                    style={{
+                      left,
+                      top: `calc(${node.top}% + ${Math.cos(Date.now()/800 + idx) * 12 - 32}px)`,
+                    }}
+                  >
+                    {messages[idx]}
+                  </div>
+                )}
+              </React.Fragment>
+            );
+          })}
         </div>
       </aside>
     </section>
