@@ -38,26 +38,30 @@ export default function Home() {
     <section id="home" className="home container" aria-labelledby="home-heading">
       <div className="hero-left">
         <div className="hero-card">
-          <div className="badge">AI · ML · MLOps</div>
+          <div className="badge">AI · ML · RAG</div>
           <h3 className="hi">Hi, I am</h3>
           <h1 className="title">Arkadipta Paul — AI Engineer</h1>
           <p className="subtitle">
-            I build production-ready ML systems, LLM integrations and robust data pipelines for life sciences & healthcare.
+            I build production-ready AI-based systems, LLM integrations and robust data pipelines for life sciences & healthcare.
             I enjoy converting research into reliable software and automating things that used to be tedious.
           </p>
 
           <div className="grid">
             <div className="card">
-              <strong>Current focus</strong>
-              <div style={{color:"var(--muted)", marginTop:8}}>Hybrid RAG systems, vector search, model ops</div>
+              <strong>Current Focus</strong>
+              <div style={{color:"var(--muted)", marginTop:8}}>Hybrid RAG Systems · Vector DB</div>
             </div>
             <div className="card">
-              <strong>Languages</strong>
-              <div style={{color:"var(--muted)", marginTop:8}}>Python · SQL · JS</div>
+              <strong>Language</strong>
+              <div style={{color:"var(--muted)", marginTop:8}}>Python · SQL · Java</div>
             </div>
             <div className="card">
               <strong>Cloud</strong>
               <div style={{color:"var(--muted)", marginTop:8}}>AWS · Azure</div>
+            </div>
+            <div className="card">
+              <strong>Tools</strong>
+              <div style={{color:"var(--muted)", marginTop:8}}>LangChain · Langfuse · Langflow</div>
             </div>
           </div>
         </div>
