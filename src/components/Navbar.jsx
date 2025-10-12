@@ -10,7 +10,9 @@ export default function Navbar(){
   return (
     <header className="nav container" role="banner">
       <div className="brand">
-        <div className="logo">AP</div>
+      <div className="logo">
+        <img src="./profile.JPG" alt="Profile" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "10px" }}/>
+      </div>
         <div>
           <div style={{fontSize:14}}>Arkadipta Paul</div>
           <div style={{fontSize:12,color:"var(--muted)"}}>AI Engineer</div>
