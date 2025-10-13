@@ -340,3 +340,59 @@ body{
   margin-right: 8px;
   box-shadow: 0 0 8px #00e0ff44;
 }
+
+/* Add these styles before the media queries */
+.project-card-container {
+  perspective: 1000px;
+  height: 240px;
+}
+
+.project-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.project-card-container.flipped .project-card-inner {
+  transform: rotateY(180deg);
+}
+
+.project-card-front,
+.project-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.project-card-back {
+  transform: rotateY(180deg);
+  overflow-y: auto;
+}
+
+.project-card-back ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-card-back li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.project-card-back li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent2);
+}

@@ -1,49 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
+import projects from "../data/projects";
+export default function ProjectCard({p}) {
+  const [isFlipped, setIsFlipped] = useState(false);
 
-export default function ProjectCard({p}){
+  const handleFlip = (e) => {
+    e.preventDefault();
+    setIsFlipped(!isFlipped);
+  };
+
   return (
-    <article
-      className="project-card"
-      aria-labelledby={`p-${p.id}`}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        minHeight: 240 // adjust as needed for your design
-      }}
-    >
-      <div>
-        <h3 id={`p-${p.id}`}>{p.title}</h3>
-        <div className="project-meta">{p.short}</div>
-        <div style={{display:"flex", gap:8, flexWrap:"wrap"}}>
-          {p.tech.map(t=> (
-            <div
-              key={t}
-              style={{
-                fontFamily:"var(--mono)",
-                fontSize:12,
-                color:"var(--muted)",
-                background:"rgba(255,255,255,0.02)",
-                padding:"6px 8px",
-                borderRadius:8
-              }}
-            >
-              {t}
+    <div className={`project-card-container ${isFlipped ? 'flipped' : ''}`}>
+      <div className="project-card-inner">
+        <article className="project-card-front">
+          <div>
+            <h3 id={`p-${p.id}`}>{p.title}</h3>
+            <div className="project-meta">{p.short}</div>
+            <div style={{display:"flex", gap:8, flexWrap:"wrap"}}>
+              {p.tech.map(t=> (
+                <div
+                  key={t}
+                  style={{
+                    fontFamily:"var(--mono)",
+                    fontSize:12,
+                    color:"var(--muted)",
+                    background:"rgba(255,255,255,0.02)",
+                    padding:"6px 8px",
+                    borderRadius:8
+                  }}
+                >
+                  {t}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+          <a
+            className="cta"
+            href="#"
+            onClick={handleFlip}
+            style={{
+              marginTop: "auto",
+              alignSelf: "flex-end"
+            }}
+          >
+            View Details
+          </a>
+        </article>
+
+        <article className="project-card-back">
+          <h3>{p.title} - Details</h3>
+          <ul>
+            {p.details.map((details, index) => (
+              <li key={index}>{details}</li>
+            ))}
+          </ul>
+          <a
+            className="cta"
+            href="#"
+            onClick={handleFlip}
+            style={{
+              marginTop: "auto",
+              alignSelf: "flex-end"
+            }}
+          >
+            Back
+          </a>
+        </article>
       </div>
-      <a
-        className="cta"
-        href={p.link}
-        onClick={e=>e.preventDefault()}
-        style={{
-          marginTop: "auto",
-          alignSelf: "flex-end"
-        }}
-      >
-        View details
-      </a>
-    </article>
+    </div>
   );
 }
