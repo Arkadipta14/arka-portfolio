@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 export default function Home() {
-  const [activeNode, setActiveNode] = useState(null);
-  const [tooltip, setTooltip] = useState({ idx: null, visible: false });
+  const [tooltip, setTooltip] = useState({ idx: 0, visible: true });
   const [, setTick] = useState(0);
 
   useEffect(() => {
@@ -10,13 +9,13 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  // Tooltip hide logic
+  // Auto-cycle tooltips
   useEffect(() => {
-    if (tooltip.visible) {
-      const timer = setTimeout(() => setTooltip({ idx: null, visible: false }), 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [tooltip]);
+    const interval = setInterval(() => {
+      setTooltip(prev => ({ idx: (prev.idx + 1) % 5, visible: true }));
+    }, 1600);
+    return () => clearInterval(interval);
+  }, []);
 
   const nodes = [
     { left: 20, top: 18, size: 24 },
@@ -74,19 +73,14 @@ export default function Home() {
             return (
               <React.Fragment key={idx}>
                 <div
-                  className={`node animated-node${activeNode === idx ? " active" : ""}`}
+                  className={`node animated-node`}
                   style={{
                     left,
                     top,
                     width: node.size,
                     height: node.size,
-                    background: activeNode === idx ? "linear-gradient(135deg,#7b61ff,#00e0ff)" : "#7b61ff"
+                    background: "#7b61ff"
                   }}
-                  onClick={() => {
-                    setActiveNode(idx);
-                    setTooltip({ idx, visible: true });
-                  }}
-                  tabIndex={0}
                   aria-label={`Animated node ${idx+1}`}
                 />
                 {tooltip.visible && tooltip.idx === idx && (

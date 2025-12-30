@@ -4,8 +4,8 @@ import certs from "../data/certs";
 export default function Certifications(){
   return (
     <section id="certs" className="section container" aria-labelledby="certs-heading">
-      <h2 id="certs-heading">Certifications</h2>
-      <p style={{color:"var(--muted)"}}>Recognitions & certificates relevant to ML and cloud.</p>
+      <h2 id="certs-heading">CERTIFICATIONS</h2>
+      <p style={{color:"var(--muted)"}}>Recognitions & Certifications relevant to AL/ML.</p>
 
       <div className="cert-grid" style={{marginTop:12}}>
         {certs.map(c => (
