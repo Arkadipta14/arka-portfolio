@@ -5,7 +5,7 @@ import ProjectCard from "./ProjectCard";
 export default function Projects(){
   return (
     <section id="projects" className="section container" aria-labelledby="projects-heading">
-      <h2 id="projects-heading">Projects</h2>
+      <h2 id="projects-heading">PROJECTS</h2>
       <p style={{color:"var(--muted)"}}>A selection of production work and prototypes relevant to LLMs & ML systems.</p>
 
       <div className="projects-grid" style={{marginTop:12}}>
