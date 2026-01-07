@@ -1,0 +1,6 @@
+
+Run locally - npm run dev
+
+For Hosting
+npm run build
+npm run deploy
